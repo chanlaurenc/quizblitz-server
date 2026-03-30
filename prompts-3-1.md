@@ -14,3 +14,6 @@
 
 **/[Claude Sonnet 4.6]** Why does the return keyword matter in the validation block 
 of the POST /api/scores route?
+
+**/[Claude Sonnet 4.6]** Walk me through Milestone 5 - testing the complete API 
+in Thunder Client, what should I be checking for each route?
