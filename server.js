@@ -38,17 +38,18 @@ app.get('/api/questions/random', (req, res) => {
   res.json(shuffled.slice(0, 10))
 })
 
-// POST /api/scores — submit a score
-app.post('/api/scores', async (req, res) => {
-  const { playerName, score, totalQuestions } = req.body
+// POST /api/scores — submit a score add verify token
+app.post('/api/scores', verifyToken, async (req, res) => {
+  const { score, totalQuestions } = req.body
 
-  if (!playerName || score === undefined || !totalQuestions) {
-    return res.status(400).json({ error: 'playerName, score, and totalQuestions are required' })
+  if (score === undefined || !totalQuestions) {
+    return res.status(400).json({ error: 'score and totalQuestions are required' })
   }
 
   try {
     const newScore = await Score.create({
-      playerName,
+      userId: req.user.userId,
+      playerName: req.user.email,
       score,
       totalQuestions
     })
