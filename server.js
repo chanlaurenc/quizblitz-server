@@ -10,10 +10,16 @@ const jwt = require('jsonwebtoken')
 const verifyToken = require('./middleware/verifyToken')
 
 const app = express()
-const PORT = 3000
+
+const allowedOrigins = [
+  'http://localhost:5174',
+  'https://chanlaurenc.github.io'
+]
 
 // Middleware
-app.use(cors())
+app.use(cors({
+  origin: allowedOrigins
+}))
 app.use(express.json())
 
 // Test route
